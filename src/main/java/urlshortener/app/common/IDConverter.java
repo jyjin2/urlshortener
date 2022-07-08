@@ -7,6 +7,7 @@ import java.util.List;
 
 public class IDConverter {
     public static final IDConverter INSTANCE = new IDConverter();
+    private static final int BASE_62_SIZE = 62;
 
     private IDConverter() {
         initializeCharToIndexTable();
@@ -68,9 +69,9 @@ public class IDConverter {
     private static List<Integer> convertBase10ToBase62ID(Long id) {
         List<Integer> digits = new LinkedList<>();
         while(id > 0) {
-            int remainder = (int)(id % 62);
+            int remainder = (int)(id % BASE_62_SIZE);
             ((LinkedList<Integer>) digits).addFirst(remainder);
-            id /= 62;
+            id /= BASE_62_SIZE;
         }
         return digits;
     }

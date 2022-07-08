@@ -34,17 +34,6 @@ public class URLController {
         if (URLValidator.INSTANCE.validateURL(longUrl)) {
             String localURL = request.getRequestURL().toString();
 
-            // 중복
-//            if (longUrl.exists(url)) {
-//
-//            }
-//            if(urlShortDao.exists(url)){
-//                shortUrl = urlShortDao.findByUrl(url);
-//                shortUrlResult.setShortUrlType(shortUrl.getShortUrl().equals(url) ? ShortUrlType.ORIGIN:ShortUrlType.SHORT);
-//                shortUrl.setReqCount(shortUrl.getReqCount()+1);
-//                shortUrlResult.setShortUrl(shortUrl);
-//                shortUrlResult.setShortUrlType(ShortUrlType.ORIGIN);
-
             String shortenedUrl = urlConverterService.shortenURL(localURL, shortenRequest.getUrl());
             LOGGER.info("Shortened url to: " + shortenedUrl);
             return shortenedUrl;
@@ -52,7 +41,7 @@ public class URLController {
         throw new Exception("Please enter a valid URL");
     }
 
-    @RequestMapping(value = "/{id}", method=RequestMethod.GET)
+    @RequestMapping(value = "/id/{id}", method=RequestMethod.GET)
     public RedirectView redirectUrl(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException, Exception {
         LOGGER.info("Received shortened url to redirect: " + id);
         String redirectUrlString = urlConverterService.getLongURLFromID(id);

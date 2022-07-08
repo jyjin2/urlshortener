@@ -5,12 +5,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import urlshortener.app.common.IDConverter;
+import urlshortener.app.domain.Shortener;
+import urlshortener.app.repository.ShortenerRepository;
 import urlshortener.app.repository.URLRepository;
+
+import java.util.Optional;
 
 @Service
 public class URLConverterService {
     private static final Logger LOGGER = LoggerFactory.getLogger(URLConverterService.class);
     private final URLRepository urlRepository;
+
+    @Autowired
+    ShortenerRepository shortenerRepository;
 
     @Autowired
     public URLConverterService(URLRepository urlRepository) {
@@ -19,17 +26,28 @@ public class URLConverterService {
 
     public String shortenURL(String localURL, String longUrl) {
         LOGGER.info("Shortening {}", longUrl);
-        Long id = urlRepository.incrementID();
+//        Long id = urlRepository.incrementID();
+        // todo DB
+        Long id = shortenerRepository.count();
         String uniqueID = IDConverter.INSTANCE.createUniqueID(id);
-        urlRepository.saveUrl("url:"+id, longUrl);
+//        urlRepository.saveUrl("url:"+id, longUrl);
+        //urlRepository2.savel("url:"+id, longUrl);
+        Shortener shortener = new Shortener();
+        shortener.setUrlKey(longUrl);
+        shortenerRepository.save(shortener);
         String baseString = formatLocalURLFromShortener(localURL);
-        String shortenedURL = baseString + uniqueID;
+        String shortenedURL = baseString + "id/" + uniqueID;
         return shortenedURL;
     }
 
     public String getLongURLFromID(String uniqueID) throws Exception {
         Long dictionaryKey = IDConverter.INSTANCE.getDictionaryKeyFromUniqueID(uniqueID);
-        String longUrl = urlRepository.getUrl(dictionaryKey);
+//        String longUrl = urlRepository.getUrl(dictionaryKey);
+        Optional<Shortener> optional = shortenerRepository.findById(dictionaryKey);
+        if(!optional.isPresent()) {
+            throw new Exception("shortener is empty");
+        }
+        String longUrl = optional.get().getUrlKey();
         LOGGER.info("Converting shortened URL back to {}", longUrl);
         return longUrl;
     }
