@@ -2,6 +2,8 @@ package urlshortener.app.domain;
 
 import javax.persistence.*;
 
+// 1-100 cycle
+
 @Entity
 @Table(name = "shortener")
 //@SequenceGenerator(name="URL_KEY_SEQ_GEN", sequenceName="URL_KEY_SEQ",initialValue=1,allocationSize=1)
@@ -14,8 +16,8 @@ public class Shortener {
     @Column(name = "idKey", length=10)
     private String idKey;
 
-    @Column(name = "shortened", length=25)
-    private String shortUrl;
+//    @Column(name = "shortened", length=25)
+//    private String shortUrl;
 
     @Column(name = "urlKey", length=255)
     private String urlKey;
@@ -35,6 +37,14 @@ public class Shortener {
     public void setIdKey(String idKey) {
         this.idKey = idKey;
     }
+
+//    public String getShortUrl() {
+//        return shortUrl;
+//    }
+//
+//    public void setShortUrl() {
+//        this.shortUrl = shortUrl;
+//    }
 
     public String getUrlKey() {
         return urlKey;

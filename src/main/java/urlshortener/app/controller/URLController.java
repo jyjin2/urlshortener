@@ -38,6 +38,7 @@ public class URLController {
             LOGGER.info("Shortened url to: " + shortenedUrl);
             return shortenedUrl;
         }
+//        return "invalidURL";
         throw new Exception("Please enter a valid URL");
     }
 

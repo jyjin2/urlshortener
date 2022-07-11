@@ -31,7 +31,7 @@ public class URLConverterService {
         Long id = shortenerRepository.count();
         String uniqueID = IDConverter.INSTANCE.createUniqueID(id);
 //        urlRepository.saveUrl("url:"+id, longUrl);
-        //urlRepository2.savel("url:"+id, longUrl);
+        //urlRepository2.saveUrl("url:"+id, longUrl);
         Shortener shortener = new Shortener();
         shortener.setUrlKey(longUrl);
         shortenerRepository.save(shortener);

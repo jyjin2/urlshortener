@@ -1,0 +1,46 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <title>URL Shortener</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<form method="post" action="http://server1">-->
+<!--    url 단축하기-->
+<!--    <input type="text" name="url">-->
+<!--    <br/>-->
+<!--    <input type="submit" value="단축하기">-->
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title>url shortening</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <form action="#" th:action="@{/}" method="post"/>
+    <input type="text" th:name="longUrl"/>
+    <button type="submit">ENTER</button>
+    </form>
+    <br/>
+    <br/>
+
+    <div class="panel">
+        original URL : <p th:text="${longUrl}" />
+        <br/>
+        shorten URL : <p th:text="${shortUrl}" />
+    </div>
+</th:block>
+</body>
+</html>
+
+<!--<p>단축 URL</p>-->
+<!--<form action="login.asp">-->
+<!--    <p><label for="id">아이디 : </label><input type="text" name="id" id="id"></p>-->
+<!--    <input type="submit" value="확인">-->
+<!--</form>-->
