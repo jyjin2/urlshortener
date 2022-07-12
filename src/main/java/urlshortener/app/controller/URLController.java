@@ -36,10 +36,10 @@ public class URLController {
 
             String shortenedUrl = urlConverterService.shortenURL(localURL, shortenRequest.getUrl());
             LOGGER.info("Shortened url to: " + shortenedUrl);
-            return shortenedUrl;
+            return shortenedUrl; // index shortenedUrl
         }
 //        return "invalidURL";
-        throw new Exception("Please enter a valid URL");
+        throw new Exception("Please enter a valid URL.");
     }
 
     @RequestMapping(value = "/id/{id}", method=RequestMethod.GET)
@@ -57,11 +57,6 @@ class ShortenRequest{
     private String url;
 
     @JsonCreator
-    public ShortenRequest() {
-
-    }
-
-    @JsonCreator
     public ShortenRequest(@JsonProperty("url") String url) {
         this.url = url;
     }
@@ -76,5 +71,3 @@ class ShortenRequest{
 
     //
 }
-
-
