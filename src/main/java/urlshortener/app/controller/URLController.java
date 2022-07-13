@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import urlshortener.app.common.URLValidator;
@@ -27,8 +28,10 @@ public class URLController {
         this.urlConverterService = urlConverterService;
     }
 
-    @RequestMapping(value = "/shortener", method=RequestMethod.POST, consumes = {"application/json"})
-    public String shortenUrl(@RequestBody @Valid final @NotNull ShortenRequest shortenRequest, HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "/shortenUrl", method=RequestMethod.POST
+            , consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
+            , produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // shortener
+    public String shortenUrl(@Valid final @NotNull ShortenRequest shortenRequest, HttpServletRequest request) throws Exception {
         LOGGER.info("Received url to shorten: " + shortenRequest.getUrl());
         String longUrl = shortenRequest.getUrl();
         if (URLValidator.INSTANCE.validateURL(longUrl)) {

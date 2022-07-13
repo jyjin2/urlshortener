@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Invalid URL</title>
+    <link rel="stylesheet" href="../static/style.css" />
 </head>
 <body>
-<th:block layout:fragment="wrongUrl">
+<!--<th:block layout:fragment="wrongUrl">-->
     <div>
         The requested URL is invalid.<br/>Please enter a valid URL.
         <br/>
@@ -12,7 +13,7 @@
         <br/>
         <a href="/"><button>Return to previous page</button></a>
     </div>
-</th:block>
+<!--</th:block>-->
 
 </body>
 </html>
