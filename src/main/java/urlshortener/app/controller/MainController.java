@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/test")
+//@RequestMapping("/")
 public class MainController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
@@ -32,23 +32,18 @@ public class MainController {
 //        return "index";
 //    }
 
-    @GetMapping("/index")
-    public String index(){
-        return "temp";
-    }
-
-    @GetMapping("/index2")
+    @GetMapping("/")
     public String index2(Model model){
         model.addAttribute("test", "good job");
         return "index";
     }
 
-    @GetMapping("/index3")
-    public String index3(){
-        return "invalidURL";
-    }
+//    @GetMapping("/index3")
+//    public String index3(){
+//        return "invalidURL";
+//    }
 
-    @RequestMapping(value = "/shortenUrl", method= RequestMethod.POST
+    @RequestMapping(value = "/sUrl", method= {RequestMethod.GET, RequestMethod.POST}
             , consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
             , produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // shortener
     public String shortenUrl(@Valid final @NotNull ShortenRequest shortenRequest, HttpServletRequest request, Model model) throws Exception {
