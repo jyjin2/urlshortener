@@ -34,6 +34,7 @@ public class URLConverterService {
         //urlRepository2.saveUrl("url:"+id, longUrl);
         Shortener shortener = new Shortener();
         shortener.setUrlKey(longUrl);
+        shortener.setShortUrl(uniqueID);
         shortenerRepository.save(shortener);
         String baseString = formatLocalURLFromShortener(localURL);
         String shortenedURL = baseString + "id/" + uniqueID;

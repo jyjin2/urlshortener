@@ -21,6 +21,10 @@ public class IDConverter {
     private static HashMap<Character, Integer> charToIndexTable;
     private static List<Character> indexToCharTable;
 
+    public static void main(String[] args) {
+        LOGGER.debug(charToIndexTable.toString());
+        LOGGER.debug(indexToCharTable.toString());
+    }
     private void initializeCharToIndexTable() {
         charToIndexTable = new HashMap<>();
         // 0->a, 1->b, ..., 25->z, ..., 52->0, 61->9
@@ -77,6 +81,9 @@ public class IDConverter {
             ((LinkedList<Integer>) digits).addFirst(remainder);
             id /= BASE_62_SIZE;
         }
+        if(id == 0L) {
+            digits.add(0);
+        }
         return digits;
     }
 
@@ -91,7 +98,8 @@ public class IDConverter {
 
     private static Long convertBase62ToBase10ID(List<Character> ids) {
         long id = 0L;
-        for (int i = 0, exp = ids.size() - 1; i < ids.size(); ++i, --exp) {
+        int exp = ids.size() - 1;
+        for (int i = 0; i < ids.size(); ++i, --exp) {
             int base10 = charToIndexTable.get(ids.get(i));
             id += (base10 * Math.pow(62.0, exp));
         }

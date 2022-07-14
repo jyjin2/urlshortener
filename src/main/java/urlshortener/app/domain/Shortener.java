@@ -6,17 +6,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "shortener")
-//@SequenceGenerator(name="URL_KEY_SEQ_GEN", sequenceName="URL_KEY_SEQ",initialValue=1,allocationSize=1)
+@SequenceGenerator(name="URL_KEY_SEQ_GEN", sequenceName="URL_KEY_SEQ",initialValue=0,allocationSize=1)
 public class Shortener {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="URL_KEY_SEQ_GEN")
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="URL_KEY_SEQ_GEN")
     @Column(name = "idKey", length=10)
     private String idKey;
 
-    @Column(name = "shortened", length=25)
+    @Column(name = "shortened", length=10)
     private String shortUrl;
 
     @Column(name = "urlKey", length=255)
