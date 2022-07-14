@@ -12,12 +12,12 @@ public class Shortener {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="URL_KEY_SEQ_GEN")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="URL_KEY_SEQ_GEN")
     @Column(name = "idKey", length=10)
     private String idKey;
 
-//    @Column(name = "shortened", length=25)
-//    private String shortUrl;
+    @Column(name = "shortened", length=25)
+    private String shortUrl;
 
     @Column(name = "urlKey", length=255)
     private String urlKey;
@@ -30,21 +30,21 @@ public class Shortener {
         this.id = id;
     }
 
-    public String getIdKey() {
-        return idKey;
-    }
-
-    public void setIdKey(String idKey) {
-        this.idKey = idKey;
-    }
-
-//    public String getShortUrl() {
-//        return shortUrl;
+//    public String getIdKey() {
+//        return idKey;
 //    }
 //
-//    public void setShortUrl() {
-//        this.shortUrl = shortUrl;
+//    public void setIdKey(String idKey) {
+//        this.idKey = idKey;
 //    }
+
+    public String getShortUrl() {
+        return shortUrl;
+    }
+
+    public void setShortUrl(String shortUrl) {
+        this.shortUrl = shortUrl;
+    }
 
     public String getUrlKey() {
         return urlKey;

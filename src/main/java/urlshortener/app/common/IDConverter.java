@@ -1,5 +1,8 @@
 package urlshortener.app.common;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -9,6 +12,7 @@ public class IDConverter {
     public static final IDConverter INSTANCE = new IDConverter();
     private static final int BASE_62_SIZE = 62;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(IDConverter.class);
     private IDConverter() {
         initializeCharToIndexTable();
         initializeIndexToCharTable();
