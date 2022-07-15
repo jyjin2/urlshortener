@@ -76,13 +76,13 @@ public class IDConverter {
 
     private static List<Integer> convertBase10ToBase62ID(Long id) {
         List<Integer> digits = new LinkedList<>();
+        if(id == 0L) {
+            digits.add(0);
+        }
         while(id > 0) {
             int remainder = (int)(id % BASE_62_SIZE);
             ((LinkedList<Integer>) digits).addFirst(remainder);
             id /= BASE_62_SIZE;
-        }
-        if(id == 0L) {
-            digits.add(0);
         }
         return digits;
     }

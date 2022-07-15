@@ -1,35 +1,63 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--<link rel="stylesheet" type="text/css" href="../static/style.css" />-->
 <title>url shortening</title>
 <head>
-<!--    <meta charset="utf-8">-->
-    <link rel="stylesheet" type="text/css" href="../static/style.css" />
-    <script src="../js/jquery-3.6.0.min.js"></script>
+    <meta charset="utf-8">
+<!--    <link rel="stylesheet" type="text/css" href="../static/style.css" />-->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="/WebContent/css/bootstrap.css">
     <title>url shortening</title>
 </head>
 <body>
 <!--<th:block layout:fragment="content">-->
     <form action="#" th:action="@{/sUrl}" method="post"/>
-<!--th:action="@{/sUrl}-->
     <input type="text" th:name="url"/>
     <button type="submit">ENTER</button>
     </form>
     <br/>
     <br/>
 
+
+
     <div class="panel">
         original URL : <p th:text="${longurl}" />
         <br/>
         shorten URL : <p th:text="${surl}" />
-
-
-        <!-- The button used to copy the text -->
-        <button onclick="copyToClipboard()">Copy</button>
-
     </div>
-<!--</th:block>-->
+
+    <!-- The button used to copy the text -->
+    <p id="p1">P1: I am paragraph 1</p>
+    <!--<p id="p2">P2: I am a second paragraph</p>-->
+    <button onclick="copyToClipboard('#p1')">Copy P1</button>
+    <!--<button onclick="copyToClipboard('#p2')">Copy P2</button>-->
+    <br/><br/><input type="text" placeholder="Paste here for test" />
+
+    <script type="text/javascript">
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+            alert("URL Copied.")
+        }
+
+        $('#ajax1').click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/ajax/ajax1?name=sinyoung&age=10",
+                data: { param: 'string' },
+                success: function (data) {
+                    console.log(data);
+                    alert('성공');
+                }
+            });
+        });
+
+        </script>
+
+
+<script type="text/javascript" src="/WebContent/js/bootstrap.js"></script>
 </body>
 </html>
 
