@@ -3,61 +3,89 @@
 <title>url shortening</title>
 <head>
     <meta charset="utf-8">
-<!--    <link rel="stylesheet" type="text/css" href="../static/style.css" />-->
+<!--        <link rel="stylesheet" type="text/css" href="../static/style.css" />-->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <link rel="stylesheet" href="/WebContent/css/bootstrap.css">
+<!--    <link rel="stylesheet" href="/WebContent/css/bootstrap.css">-->
     <title>url shortening</title>
 </head>
 <body>
 <!--<th:block layout:fragment="content">-->
-    <form action="#" th:action="@{/sUrl}" method="post"/>
-    <input type="text" th:name="url"/>
-    <button type="submit">ENTER</button>
-    </form>
-    <br/>
-    <br/>
+<!--<form action="#" th:action="@{/sUrl}" method="post"/>-->
+<input type="text" th:name="url"/>
+<button th:id="ajax1" type="submit">ENTER</button>
+<!--</form>-->
+<br/>
+<br/>
 
 
 
-    <div class="panel">
-        original URL : <p th:text="${longurl}" />
-        <br/>
-        shorten URL : <p th:text="${surl}" />
-    </div>
+<!--<div class="panel">-->
+<!--    original URL : <p th:text="${longurl}" />-->
+<!--    <br/>-->
+<!--    shorten URL : <p th:id="surl"  th:text="${surl}" />-->
+<!--</div>-->
 
-    <!-- The button used to copy the text -->
-    <p id="p1">P1: I am paragraph 1</p>
-    <!--<p id="p2">P2: I am a second paragraph</p>-->
-    <button onclick="copyToClipboard('#p1')">Copy P1</button>
-    <!--<button onclick="copyToClipboard('#p2')">Copy P2</button>-->
-    <br/><br/><input type="text" placeholder="Paste here for test" />
 
-    <script type="text/javascript">
-        function copyToClipboard(element) {
-            var $temp = $("<input>");
-            $("body").append($temp);
-            $temp.val($(element).text()).select();
-            document.execCommand("copy");
-            $temp.remove();
-            alert("URL Copied.")
-        }
+<!-- The button used to copy the text -->
+<button onclick="copyToClipboard()">Copy URL</button>
+<br/><br/><input type="text" placeholder="Paste here for test" />
 
-        $('#ajax1').click(function () {
-            $.ajax({
-                type: "POST",
-                url: "/ajax/ajax1?name=sinyoung&age=10",
-                data: { param: 'string' },
-                success: function (data) {
-                    console.log(data);
-                    alert('성공');
-                }
-            });
+<script type="text/javascript">
+    function copyToClipboard() {
+        var $surl = $("#surl");
+        alert($surl.text());
+    }
+
+<!-- Copy button End -->
+
+
+    $('#ajax1').on('click', function () {
+        // 버튼 여러번 클릭되지 않게 막기
+        // if(!processScript){
+        //     alert("처리중입니다.");
+        //     return;
+        // }
+
+        console.log('=========');
+        $.ajax({
+            type: "POST",
+            url: "/shortenUrl",
+            data: { url : "https://truecode-95.tistory.com/158" //, shortURL : "shortenedUrl"
+            },
+            success: function (result) {
+                console.log('Original URL: ', "localURL", '\n', 'Shorten URL: ', result);
+            },
+            error: function (request,status,error) {
+                alert('Invalid URL. Please try again.')
+                // alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
         });
+    });
 
-        </script>
+    // function dataSend() {
+    //     var data=$("#input").val();
+    //     var messageDTO={
+    //         result:data
+    //     };
+    //     $.ajax({
+    //         url: "/shortenUrl",
+    //         data: messageDTO,
+    //         type:"POST",
+    //     }).done(function (fragment) {
+    //         $("#resultDiv").replaceWith(fragment);
+    //     });
+    // }
+    //
+    // function Ajax2() {
+    //     var long = $("#longurl").val();
+    //     var short = $("#surl").val();
+
+    // }
+
+</script>
 
 
-<script type="text/javascript" src="/WebContent/js/bootstrap.js"></script>
+<!--<script type="text/javascript" src="/WebContent/js/bootstrap.js"></script>-->
 </body>
 </html>
 

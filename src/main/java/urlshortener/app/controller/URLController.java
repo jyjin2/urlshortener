@@ -28,9 +28,9 @@ public class URLController {
         this.urlConverterService = urlConverterService;
     }
 
-    @RequestMapping(value = "/shortenUrl", method=RequestMethod.POST
-            , consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
-            , produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // shortener
+    @RequestMapping(value = "/shortenUrl", method=RequestMethod.POST)
+//            , consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
+//            , produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // shortener
     public String shortenUrl(@Valid final @NotNull ShortenRequest shortenRequest, HttpServletRequest request) throws Exception {
         LOGGER.info("Received url to shorten: " + shortenRequest.getUrl());
         String longUrl = shortenRequest.getUrl();

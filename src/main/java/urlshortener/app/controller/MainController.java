@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import urlshortener.app.common.URLValidator;
 import urlshortener.app.service.URLConverterService;
 
@@ -32,11 +33,11 @@ public class MainController {
 //        return "index";
 //    }
 
-    @GetMapping("/")
-    public String index2(Model model){
-        model.addAttribute("test", "good job");
-        return "index";
-    }
+//    @GetMapping("/")
+//    public String index2(Model model){
+//        model.addAttribute("test", "good job");
+//        return "index";
+//    }
 
 //    @GetMapping("/index3")
 //    public String index3(){
@@ -58,9 +59,9 @@ public class MainController {
 //            return shortenedUrl; // index shortenedUrl
             model.addAttribute("longurl", longUrl);
             model.addAttribute("surl", shortenedUrl);
-            return "index";
+            return shortenedUrl;
         } else {
-            return "invalidURL";
+            return "error";
 //        throw new Exception("Please enter a valid URL.");
         }
     }
