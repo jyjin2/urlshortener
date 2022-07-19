@@ -11,13 +11,12 @@
 <body>
 <!--<th:block layout:fragment="content">-->
 <!--<form action="#" th:action="@{/sUrl}" method="post"/>-->
-<input type="text" th:name="url"/>
-<button th:id="ajax1" type="submit">ENTER</button>
+    <input th:id="url" type="text" th:name="url" placeholder="단축할 URL을 입력하세요"/>
+    <button th:id="ajax1" type="submit">ENTER</button>
+
 <!--</form>-->
 <br/>
 <br/>
-
-
 
 <!--<div class="panel">-->
 <!--    original URL : <p th:text="${longurl}" />-->
@@ -25,66 +24,96 @@
 <!--    shorten URL : <p th:id="surl"  th:text="${surl}" />-->
 <!--</div>-->
 
-
+<!--<p>a</p>-->
+<!--<p th:value="b" th:text="b" th:id="" th:name="" th:field=""/>-->
+<!--<div th:text="d" />-->
+<!--<h1>e</h1>-->
+<!--<h1 th:text="f"/>-->
 <!-- The button used to copy the text -->
-<button onclick="copyToClipboard()">Copy URL</button>
-<br/><br/><input type="text" placeholder="Paste here for test" />
+
+Original URL: <p id="orgurl"></p>
+Shortened URL: <p id="surl"></p>
+
+
+<div>
+<!--    <button onclick="copyToClipboard()">Copy URL</button>-->
+    <button type="button" id="copy-url" class="copy-url">URL 복사</button>
+    <input type="hidden" id="copy-area" class="copy-area">
+</div>
+
+<!--<br/><br/><input type="text" placeholder="Paste here for test" />-->
+<br/>
 
 <script type="text/javascript">
-    function copyToClipboard() {
-        var $surl = $("#surl");
-        alert($surl.text());
-    }
 
-<!-- Copy button End -->
-
-
+    // 'ajax1'라는 id를 가진 버튼 클릭 시 실행.
     $('#ajax1').on('click', function () {
-        // 버튼 여러번 클릭되지 않게 막기
-        // if(!processScript){
-        //     alert("처리중입니다.");
-        //     return;
-        // }
+        // console.log(' $("#url").val() [' +  $("#url").val() );
+        // console.log(' $("#url").text() [' +  $("#url").text() );
 
-        console.log('=========');
         $.ajax({
             type: "POST",
             url: "/shortenUrl",
-            data: { url : "https://truecode-95.tistory.com/158" //, shortURL : "shortenedUrl"
-            },
+            data: { url : $("#url").val() },
+            context: this,
             success: function (result) {
-                console.log('Original URL: ', "localURL", '\n', 'Shorten URL: ', result);
+                console.log('Original URL: ', this.url, '\n', 'Shortened URL: ', result);
+                // document.write('Original URL: ', this.url, '\n', 'Shorten URL: ', result);
+                // alert(result);
+                // $("#surl")
+                // $("div[name=surl]")
+                // $(".surl")
+                // $("#surl").html(result);
+
+                $("#orgurl").text( $("#url").val() );
+                $("#surl").text( result );
+                $("#copy-area").val( result );
+
+
+                // Reset text box
+                $('#url').val('');
+
+
+                // console.log('document.getElementById(\'#url\').value[' + document.getElementById('url').value );
+                // document.getElementById('url').value = 'adasdfasdfa';
             },
-            error: function (request,status,error) {
+            error: function () {
                 alert('Invalid URL. Please try again.')
                 // alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });
+
+        // 복사하기 버튼 클릭
+        $('#copy-url').click(function() {
+
+            // Empty box
+            // if ($("#copy-area").val().length === 0) {
+            //     alert("단축된 URL이 없습니다. 다시 시도해 주세요");
+            // }
+
+            // 화면에서 hidden 처리한 input box type을 text로 일시 변환
+            $('#copy-area').attr('type', 'text');
+            // input에 담긴 데이터를 선택
+            $('#copy-area').select();
+
+            console.log($("#copy-area").val());
+
+            //  clipboard에 데이터 복사
+            var copy = document.execCommand('copy');
+            // input box를 다시 hidden 처리
+            $('#copy-area').attr('type', 'hidden');
+
+            // 사용자 알림
+            if(copy) {
+                alert("URL이 복사되었습니다.");
+            }
+        });
+
     });
 
-    // function dataSend() {
-    //     var data=$("#input").val();
-    //     var messageDTO={
-    //         result:data
-    //     };
-    //     $.ajax({
-    //         url: "/shortenUrl",
-    //         data: messageDTO,
-    //         type:"POST",
-    //     }).done(function (fragment) {
-    //         $("#resultDiv").replaceWith(fragment);
-    //     });
-    // }
-    //
-    // function Ajax2() {
-    //     var long = $("#longurl").val();
-    //     var short = $("#surl").val();
 
-    // }
 
 </script>
-
-
 <!--<script type="text/javascript" src="/WebContent/js/bootstrap.js"></script>-->
 </body>
 </html>
