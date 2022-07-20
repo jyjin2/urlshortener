@@ -3,53 +3,65 @@
 <title>url shortening</title>
 <head>
     <meta charset="utf-8">
-<!--        <link rel="stylesheet" type="text/css" href="../static/style.css" />-->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<!--    <link rel="stylesheet" href="/WebContent/css/bootstrap.css">-->
+
+<!--  캐시 사용 금지  -->
+<!--    <meta http-equiv="Cache-Control" content="no-cache">-->
+<!--    <meta http-equiv="Expires" content="0"/>-->
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+<!--    <script src="js/bootstrap/bootstrap.js"></script>-->
+    <script th:src="@{js/bootstrap/bootstrap.js}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>url shortening</title>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="/css/bootstrap.css" />
 </head>
 <body>
-<!--<th:block layout:fragment="content">-->
-<!--<form action="#" th:action="@{/sUrl}" method="post"/>-->
-    <input th:id="url" type="text" th:name="url" placeholder="단축할 URL을 입력하세요"/>
-    <button th:id="ajax1" type="submit">ENTER</button>
 
-<!--</form>-->
 <br/>
 <br/>
 
-<!--<div class="panel">-->
-<!--    original URL : <p th:text="${longurl}" />-->
-<!--    <br/>-->
-<!--    shorten URL : <p th:id="surl"  th:text="${surl}" />-->
-<!--</div>-->
+<!-- Navigation-->
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand center" href="/">URL Shortener</a>
+    </div>
+    <br/>
+</nav>
 
-<!--<p>a</p>-->
-<!--<p th:value="b" th:text="b" th:id="" th:name="" th:field=""/>-->
-<!--<div th:text="d" />-->
-<!--<h1>e</h1>-->
-<!--<h1 th:text="f"/>-->
-<!-- The button used to copy the text -->
+<!-- Masthead-->
+<header class="masthead text-center text-black">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-xl-6">
+                <div class="text-center text-black">
+                    <h1 class="mb-5"></h1>
+                    <!-- Page heading-->
+                        <div class="row">
+                            <div class="col">
+                                <input class="form-control form-control-lg" th:id="url" type="text" th:name="url" placeholder="단축할 URL을 입력하세요" />
+                            </div>
+                            <div class="col-auto"><button class="btn btn-primary btn-lg" id="ajax1" type="submit">Submit</button></div>
+                        </div>
+                        <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <strong>Original URL:</strong> <p class="col-auto" id="orgurl"></p>
+    <strong>Shortened URL:</strong> <p class="col-auto" id="surl"></p>
 
-Original URL: <p id="orgurl"></p>
-Shortened URL: <p id="surl"></p>
-
-
-<div>
-<!--    <button onclick="copyToClipboard()">Copy URL</button>-->
-    <button type="button" id="copy-url" class="copy-url">URL 복사</button>
+    <button type="button" id="copy-url" class="copy-url btn-dark btn-sm">URL 복사</button>
     <input type="hidden" id="copy-area" class="copy-area">
-</div>
+</header>
 
-<!--<br/><br/><input type="text" placeholder="Paste here for test" />-->
 <br/>
 
 <script type="text/javascript">
 
     // 'ajax1'라는 id를 가진 버튼 클릭 시 실행.
     $('#ajax1').on('click', function () {
-        // console.log(' $("#url").val() [' +  $("#url").val() );
-        // console.log(' $("#url").text() [' +  $("#url").text() );
 
         $.ajax({
             type: "POST",
@@ -58,12 +70,6 @@ Shortened URL: <p id="surl"></p>
             context: this,
             success: function (result) {
                 console.log('Original URL: ', this.url, '\n', 'Shortened URL: ', result);
-                // document.write('Original URL: ', this.url, '\n', 'Shorten URL: ', result);
-                // alert(result);
-                // $("#surl")
-                // $("div[name=surl]")
-                // $(".surl")
-                // $("#surl").html(result);
 
                 $("#orgurl").text( $("#url").val() );
                 $("#surl").text( result );
@@ -72,49 +78,43 @@ Shortened URL: <p id="surl"></p>
 
                 // Reset text box
                 $('#url').val('');
-
-
-                // console.log('document.getElementById(\'#url\').value[' + document.getElementById('url').value );
-                // document.getElementById('url').value = 'adasdfasdfa';
             },
             error: function () {
                 alert('Invalid URL. Please try again.')
-                // alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });
-
-        // 복사하기 버튼 클릭
-        $('#copy-url').click(function() {
-
-            // Empty box
-            // if ($("#copy-area").val().length === 0) {
-            //     alert("단축된 URL이 없습니다. 다시 시도해 주세요");
-            // }
-
-            // 화면에서 hidden 처리한 input box type을 text로 일시 변환
-            $('#copy-area').attr('type', 'text');
-            // input에 담긴 데이터를 선택
-            $('#copy-area').select();
-
-            console.log($("#copy-area").val());
-
-            //  clipboard에 데이터 복사
-            var copy = document.execCommand('copy');
-            // input box를 다시 hidden 처리
-            $('#copy-area').attr('type', 'hidden');
-
-            // 사용자 알림
-            if(copy) {
-                alert("URL이 복사되었습니다.");
-            }
-        });
-
     });
 
+    // 복사하기 버튼 클릭
+    $('#copy-url').click(function() {
 
+        // 화면에서 hidden 처리한 input box type을 text로 일시 변환
+        $('#copy-area').attr('type', 'text');
+
+        // input에 담긴 데이터를 선택
+        $('#copy-area').select();
+
+        console.log($("#copy-area").val());
+
+        //  clipboard에 데이터 복사
+        var copy = document.execCommand('copy');
+
+        // input box를 다시 hidden 처리
+        $('#copy-area').attr('type', 'hidden');
+
+        // 사용자 알림
+        if(copy) {
+            // Empty box
+            if ( $("#copy-area").val().length === 0 ) {
+                alert("단축된 URL이 없습니다. 다시 시도해 주세요.");
+            }
+            else {
+                alert("URL이 복사되었습니다.");
+            }
+        }
+    });
 
 </script>
-<!--<script type="text/javascript" src="/WebContent/js/bootstrap.js"></script>-->
 </body>
 </html>
 

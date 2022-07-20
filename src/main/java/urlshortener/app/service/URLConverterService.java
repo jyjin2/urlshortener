@@ -27,7 +27,6 @@ public class URLConverterService {
     public String shortenURL(String localURL, String longUrl) {
         LOGGER.info("Shortening {}", longUrl);
 //        Long id = urlRepository.incrementID();
-        // todo DB
         Long id = shortenerRepository.count();
         String uniqueID = IDConverter.INSTANCE.createUniqueID(id);
 //        urlRepository.saveUrl("url:"+id, longUrl);
