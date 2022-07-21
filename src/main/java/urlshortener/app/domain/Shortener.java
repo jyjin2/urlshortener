@@ -13,8 +13,8 @@ public class Shortener {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "idKey", length=10)
-    private String idKey;
+//    @Column(name = "idKey", length=10)
+//    private String idKey;
 
     @Column(name = "shortened", length=10)
     private String shortUrl;

@@ -7,6 +7,8 @@ import urlshortener.app.domain.Shortener;
 @Repository
 public interface ShortenerRepository extends JpaRepository<Shortener, Long> {
 
-    Shortener findByIdKey(String idKey);
+//    Shortener findByIdKey(String idKey);
+
+
 
 }

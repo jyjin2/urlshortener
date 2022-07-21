@@ -7,22 +7,22 @@ import org.springframework.stereotype.Service;
 import urlshortener.app.common.IDConverter;
 import urlshortener.app.domain.Shortener;
 import urlshortener.app.repository.ShortenerRepository;
-import urlshortener.app.repository.URLRepository;
+//import urlshortener.app.repository.URLRepository;
 
 import java.util.Optional;
 
 @Service
 public class URLConverterService {
     private static final Logger LOGGER = LoggerFactory.getLogger(URLConverterService.class);
-    private final URLRepository urlRepository;
+//    private final URLRepository urlRepository;
 
     @Autowired
     ShortenerRepository shortenerRepository;
 
-    @Autowired
-    public URLConverterService(URLRepository urlRepository) {
-        this.urlRepository = urlRepository;
-    }
+//    @Autowired
+//    public URLConverterService(URLRepository urlRepository) {
+//        this.urlRepository = urlRepository;
+//    }
 
     public String shortenURL(String localURL, String longUrl) {
         LOGGER.info("Shortening {}", longUrl);
