@@ -13,9 +13,6 @@ public class Shortener {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(name = "idKey", length=10)
-//    private String idKey;
-
     @Column(name = "shortened", length=10)
     private String shortUrl;
 
@@ -29,14 +26,6 @@ public class Shortener {
     public void setId(Long id) {
         this.id = id;
     }
-
-//    public String getIdKey() {
-//        return idKey;
-//    }
-//
-//    public void setIdKey(String idKey) {
-//        this.idKey = idKey;
-//    }
 
     public String getShortUrl() {
         return shortUrl;
@@ -53,5 +42,11 @@ public class Shortener {
     public void setUrlKey(String urlKey) {
         this.urlKey = urlKey;
     }
+
+    public insertTable(String id, String shortUrl, String urlKey) {
+        this.id = id;
+        this.
+    }
+
 
 }

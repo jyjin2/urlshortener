@@ -15,9 +15,9 @@ public class YJConverter {
     private YJConverter() {
 //        initializeIndexToCharTable();
 //        initializeCharToIndexTable();
-
-        initializeCharToIndexRdTable();
         initializeIndexToCharRdTable();
+        initializeCharToIndexRdTable();
+
 
     }
 

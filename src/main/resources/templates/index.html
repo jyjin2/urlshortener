@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
 <title>url shortening</title>
 <head>
     <meta charset="utf-8">
@@ -19,40 +19,15 @@
 </head>
 <body>
 
-<br/>
-<br/>
-
-<!-- Navigation-->
-<!--<nav class="navbar navbar-light bg-light static-top">-->
-<!--    <div class="container">-->
-<!--        <a class="navbar-brand center" href="/">URL Shortener</a>-->
-<!--    </div>-->
-
-<!--    <div>-->
-<!--        <a class="navbar-brand" href="/history">History</a>-->
-<!--        <ul class="nav navbar-nav">-->
-<!--            <li class="active"><a href="history">Home</a></li>-->
-<!--            <li><a href="#">Page 1</a></li>-->
-<!--            <li><a href="#">Page 2</a></li>-->
-<!--            <li><a href="#">Page 3</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--    <br/>-->
-<!--</nav>-->
-
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">URL Shortener</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="/history">History</a></li>
-        </ul>
-    </div>
-</nav>
+<!-- Navigation -->
+<th:block th:replace="header" :: header></th:block>
 
 <!-- Masthead-->
-<header class="masthead text-center text-black">
+<!--<header class="masthead text-center text-black">-->
+<p>
+    <br/>
+    <br/>
+    <br/><br/>
     <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-xl-6">
@@ -70,14 +45,20 @@
             </div>
         </div>
     </div>
-    <strong>Original URL:</strong> <p class="col-auto" id="orgurl"></p>
-    <strong>Shortened URL:</strong> <p class="col-auto" id="surl"></p>
 
-    <button type="button" id="copy-url" class="copy-url btn-dark btn-sm">URL 복사</button>
-    <input type="hidden" id="copy-area" class="copy-area">
-</header>
+    <div class="text-center text-black">
+        <strong>Original URL:</strong> <p class="col-auto" id="orgurl"></p>
+        <strong>Shortened URL:</strong> <p class="col-auto" id="surl"></p>
+        <button type="button" id="copy-url" class="copy-url btn-dark btn-sm">URL 복사</button>
+        <input type="hidden" id="copy-area" class="copy-area">
+    </div>
+
+<!--</header>-->
+</p>
 
 <br/>
+
+
 
 <script type="text/javascript">
 
@@ -90,7 +71,6 @@
             data: { url : $("#url").val() },
             context: this,
             success: function (result) {
-                console.log('Original URL: ', this.url, '\n', 'Shortened URL: ', result);
 
                 $("#orgurl").text( $("#url").val() );
                 $("#surl").text( result );

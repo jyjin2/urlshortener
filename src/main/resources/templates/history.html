@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>History</title>
-  
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!--    <script src="js/bootstrap/bootstrap.js"></script>-->
+    <script th:src="@{js/bootstrap/bootstrap.js}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+
+<!--     Navigation -->
+    <th:block th:replace="header" :: header></th:block>
+
+`   <p th:text="${test}"></p>
+
+<!--    <table id="data_list" clas="table table-bordered0">-->
+<!--        <thead>-->
+<!--            <tr>-->
+<!--                <th>ID</th>-->
+<!--                <th>Short ID</th>-->
+<!--                <th>Original URL</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--    </table>-->
+
+<!--    <script>-->
+<!--        $("data_list").DataTable({-->
+<!--            ajax: { url: "data.json", dataSrc: ''},-->
+<!--            columns: [-->
+<!--                {data: "id"}-->
+<!--            ]-->
+<!--        })-->
 
 </body>
 </html>
