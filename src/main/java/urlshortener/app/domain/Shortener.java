@@ -1,6 +1,11 @@
 package urlshortener.app.domain;
 
+import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 // 1-100 cycle
 
@@ -18,6 +23,14 @@ public class Shortener {
 
     @Column(name = "urlKey", length=255)
     private String urlKey;
+
+//    @Column(name = "regDate", updatable = false)
+    @Column(name = "regDate")
+    private LocalDateTime regDate;
+
+//    @Column(name = "delDate", updatable = false)
+    @Column(name = "delDate")
+    private LocalDateTime delDate;
 
     public Long getId() {
         return id;
@@ -43,10 +56,20 @@ public class Shortener {
         this.urlKey = urlKey;
     }
 
-    public insertTable(String id, String shortUrl, String urlKey) {
-        this.id = id;
-        this.
+    public LocalDateTime getRegDate() {
+        return regDate;
     }
 
+    public void setRegDate(LocalDateTime regDate) {
+        this.regDate = regDate;
+    }
+
+    public LocalDateTime getDelDate() {
+        return delDate;
+    }
+
+    public void setDelDate(LocalDateTime delDate) {
+        this.delDate = delDate;
+    }
 
 }

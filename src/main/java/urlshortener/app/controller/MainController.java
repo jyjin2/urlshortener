@@ -1,28 +1,27 @@
 package urlshortener.app.controller;
 
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import urlshortener.app.common.URLValidator;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import urlshortener.app.domain.Shortener;
 import urlshortener.app.repository.ShortenerRepository;
-import urlshortener.app.service.URLConverterService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Controller
 //@RequestMapping("/")
 public class MainController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
+
+    @Autowired
+    ShortenerRepository shortenerRepository;
 
 //    private final URLConverterService urlConverterService;
 //
@@ -44,13 +43,45 @@ public class MainController {
     @GetMapping("/history")
     public String history(Model model) {
         // todo get history data
-
         // todo set model
-        model.addAttribute("test", ShortenerRepository.findAll()); // ShortenerRepository.findAll()
 
+        model.addAttribute("tasks", shortenerRepository.findByDelDateIsNull()); // ShortenerRepository.findAll()
+        return "history";
+
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable(value = "id")Long id, Model model) {
+
+        LOGGER.info("test {}", shortenerRepository.findByDelDateIsNull());
+
+        Optional<Shortener> optionalShortener = shortenerRepository.findById(id);
+        if (optionalShortener.isPresent()) {
+            Shortener shortener = optionalShortener.get();
+            shortener.setDelDate(LocalDateTime.now());
+            shortenerRepository.save(shortener);
+
+            model.addAttribute("tasks", shortenerRepository.findByDelDateIsNull());
+
+//            Shortener fromShortener = optionalShortener.get();
+//            Shortener toShortener = new Shortener();
+//            toShortener.setId(fromShortener.getId());
+//            toShortener.setDelDate(LocalDateTime.now());
+//            toShortener.setRegDate(fromShortener.getRegDate());
+//            toShortener.setShortUrl(fromShortener.getShortUrl());
+//            toShortener.setUrlKey(fromShortener.getUrlKey());
+//            shortenerRepository.save(toShortener);
+            return "history";
+        }
+
+        model.addAttribute("errorMsg", "error");
         return "history";
     }
 }
+
+
+
+
 //
 //
 //    @RequestMapping(value = "/sUrl", method= {RequestMethod.GET, RequestMethod.POST}

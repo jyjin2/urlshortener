@@ -47,7 +47,6 @@ public class YJConverter {
         for (int i = 0; i < BASE_62_CHAR_VER_220721.length(); ++i) {
             indexToCharRdTable.add(BASE_62_CHAR_VER_220721.charAt(i));
         }
-
     }
 
     private void initializeCharToIndexTable() {

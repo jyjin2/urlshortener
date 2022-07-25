@@ -9,6 +9,8 @@ import urlshortener.app.domain.Shortener;
 import urlshortener.app.repository.ShortenerRepository;
 //import urlshortener.app.repository.URLRepository;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -34,6 +36,7 @@ public class URLConverterService {
         Shortener shortener = new Shortener();
         shortener.setUrlKey(longUrl);
         shortener.setShortUrl(uniqueID);
+        shortener.setRegDate(LocalDateTime.now());
         shortenerRepository.save(shortener);
         String baseString = formatLocalURLFromShortener(localURL);
         String shortenedURL = baseString + "id/" + uniqueID;

@@ -12,28 +12,43 @@
 </head>
 <body>
 
-<!--     Navigation -->
+    <!--     Navigation -->
     <th:block th:replace="header" :: header></th:block>
 
-`   <p th:text="${test}"></p>
 
-<!--    <table id="data_list" clas="table table-bordered0">-->
-<!--        <thead>-->
-<!--            <tr>-->
-<!--                <th>ID</th>-->
-<!--                <th>Short ID</th>-->
-<!--                <th>Original URL</th>-->
-<!--            </tr>-->
-<!--        </thead>-->
-<!--    </table>-->
+    <p></p>
+    <br/>
+    <br/>
 
-<!--    <script>-->
-<!--        $("data_list").DataTable({-->
-<!--            ajax: { url: "data.json", dataSrc: ''},-->
-<!--            columns: [-->
-<!--                {data: "id"}-->
-<!--            ]-->
-<!--        })-->
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <td style="word-break: break-all">ID</td>
+            <td style="word-break: break-all">Short ID</td>
+            <td style="word-break: break-all">Original URL</td>
+            <td style="word-break: break-all">REG DATE</td>
+            <td style="word-break: break-all">Del ??</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${tasks.empty}">
+            <td colspan="5">No tasks</td>
+        </tr>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.id}"></td>
+<!--            <td><a href="view.html" th:href="@{'/' + ${task.id}}" th:text="${task.title}">Title ...</a></td>-->
+            <td th:text="${task.shortUrl}"></td>
+            <td th:text="${task.urlKey}"></td>
+<!--            <td th:text="${#temporals.formatISO(task.regDate)}"></td>-->
+            <td th:text="${#temporals.format(task.regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td><a th:href="@{'/delete/' + ${task.id}}"><button class="btn-dark btn-sm">Delete</button></a></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</script>
 
 </body>
 </html>
