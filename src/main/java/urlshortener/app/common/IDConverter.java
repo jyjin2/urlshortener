@@ -22,6 +22,8 @@ public class IDConverter {
         LOGGER.debug(charToIndexTable.toString());
         LOGGER.debug(indexToCharTable.toString());
     }
+
+    //
     private void initializeCharToIndexTable() {
         charToIndexTable = new HashMap<>();
         // 0->a, 1->b, ..., 25->z, ..., 52->0, 61->9

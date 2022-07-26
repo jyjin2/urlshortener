@@ -1,16 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>content</title>
+<html
+        lagn="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
 
+
+<!-- head 시작 -->
+<head lang="en" xmlns:layout="http://www.w3.org/1999/xhtml">
+  <meta charset="UTF-8">
   <script src="js/jquery-3.6.0.min.js"></script>
+  <script th:src="@{js/bootstrap/bootstrap.js}"></script>
   <link rel="stylesheet" href="css/bootstrap.css">
   <!--    <script src="js/bootstrap/bootstrap.js"></script>-->
-  <script th:src="@{js/bootstrap/bootstrap.js}"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+  <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Content</title>
 </head>
-<body>
+<!-- head 끝 -->
 
-</body>
+<!--<body>-->
+<!--/* Standard layout can be mixed with Layout Dialect */-->
+<!--<div th:replace="header :: header"></div>-->
+
+<!-- content 시작 -->
+<!--<div layout:fragment="content"></div>-->
+<!-- content 끝 -->
+
+<header th:replace="header :: header"></header>
+
+<div layout:fragment="content"></div>
+
+<!--</body>-->
 </html>

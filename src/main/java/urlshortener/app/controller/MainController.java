@@ -50,6 +50,11 @@ public class MainController {
 
     }
 
+    @GetMapping("/hello")
+    public String hello(Model model) {
+        return "hello";
+    }
+
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable(value = "id")Long id, Model model) {
 

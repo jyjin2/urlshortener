@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
-<title>url shortening</title>
+<title>URL Shortener</title>
 <head>
     <meta charset="utf-8">
 
@@ -13,18 +13,18 @@
 <!--    <script src="js/bootstrap/bootstrap.js"></script>-->
     <script th:src="@{js/bootstrap/bootstrap.js}"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>url shortening</title>
+    <title>URL Shortener</title>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="/css/bootstrap.css" />
 </head>
 <body>
 
-<!-- Navigation -->
+<!-- [header] 영역 시작 -->
 <th:block th:replace="header" :: header></th:block>
+<!-- [header] 영역 끝 -->
 
-<!-- Masthead-->
-<!--<header class="masthead text-center text-black">-->
-<p>
+<div layout:fragment="content">
+<!--    -->
     <br/>
     <br/>
     <br/><br/>
@@ -40,12 +40,12 @@
                             </div>
                             <div class="col-auto"><button class="btn btn-primary btn-lg" id="ajax1" type="submit">Submit</button></div>
                         </div>
-                        <br/>
                 </div>
             </div>
         </div>
     </div>
 
+    <br/>
     <div class="text-center text-black">
         <strong>Original URL:</strong> <p class="col-auto" id="orgurl"></p>
         <strong>Shortened URL:</strong> <p class="col-auto" id="surl"></p>
@@ -53,12 +53,8 @@
         <input type="hidden" id="copy-area" class="copy-area">
     </div>
 
-<!--</header>-->
-</p>
-
 <br/>
-
-
+</div>
 
 <script type="text/javascript">
 
@@ -116,6 +112,7 @@
     });
 
 </script>
+
 </body>
 </html>
 

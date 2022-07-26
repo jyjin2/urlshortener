@@ -27,7 +27,7 @@
             <td style="word-break: break-all">Short ID</td>
             <td style="word-break: break-all">Original URL</td>
             <td style="word-break: break-all">REG DATE</td>
-            <td style="word-break: break-all">Del ??</td>
+            <td style="word-break: break-all">Delete</td>
         </tr>
         </thead>
         <tbody>
@@ -41,14 +41,12 @@
             <td th:text="${task.urlKey}"></td>
 <!--            <td th:text="${#temporals.formatISO(task.regDate)}"></td>-->
             <td th:text="${#temporals.format(task.regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td><a th:href="@{'/delete/' + ${task.id}}"><button class="btn-dark btn-sm">Delete</button></a></td>
+            <td><a th:href="@{'/delete/' + ${task.id}}"><button class="btn-dark btn-sm" onclick="return confirm('데이터를 삭제하시겠습니까?')">Delete</button></a></td>
         </tr>
         </tbody>
     </table>
 
 
-
-</script>
 
 </body>
 </html>
