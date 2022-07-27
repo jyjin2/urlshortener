@@ -28,9 +28,10 @@ public class URLController {
         this.urlConverterService = urlConverterService;
     }
 
-    @RequestMapping(value = "/shortenUrl", method=RequestMethod.POST)
+//    @RequestMapping(value = "/shortenUrl", method=RequestMethod.POST
 //            , consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
 //            , produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // shortener
+    @RequestMapping(value = "/shortenUrl", method=RequestMethod.POST) // consumes = {"application/json"})
     public String shortenUrl(@Valid final @NotNull ShortenRequest shortenRequest, HttpServletRequest request) throws Exception {
         LOGGER.info("Received url to shorten: " + shortenRequest.getUrl());
         String longUrl = shortenRequest.getUrl();
@@ -42,6 +43,32 @@ public class URLController {
             return shortenedUrl; // index shortenedUrl
         }
         throw new Exception("Please enter a valid URL.");
+    }
+
+
+//    @PostMapping("/shortener")
+//    public String shortenUrl(@Valid final @NotNull ShortenRequest shortenRequest, HttpServletRequest request) throws Exception {
+//        LOGGER.info("Received url to shorten: " + shortenRequest.getUrl());
+//        String longUrl = shortenRequest.getUrl();
+//        if (URLValidator.INSTANCE.validateURL(longUrl)) {
+//            String localURL = request.getRequestURL().toString();
+//
+//            String shortenedUrl = urlConverterService.shortenURL(localURL, shortenRequest.getUrl());
+//            LOGGER.info("Shortened url to: " + shortenedUrl);
+//            return shortenedUrl; // index shortenedUrl
+//        }
+//        throw new Exception("Please enter a valid URL.");
+//    }
+
+    @RequestMapping(value = "/test", method=RequestMethod.POST, consumes = {"application/json"})
+    public String test(ShortenRequest shortenRequest, HttpServletRequest request) throws Exception {
+        LOGGER.info("Received url to test : " + shortenRequest.getUrl());
+      return shortenRequest.getUrl();
+    }
+
+    @PostMapping("/post1")
+    public void post1(@RequestBody ShortenRequest shortenRequest){
+        LOGGER.info("Received url to test : " + shortenRequest.getUrl());
     }
 
     @RequestMapping(value = "/id/{id}", method=RequestMethod.GET)

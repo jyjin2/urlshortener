@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-// 1-100 cycle
+// repository interface and the in-memory implementation
 
 @Entity
 @Table(name = "shortener")
