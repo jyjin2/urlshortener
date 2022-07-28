@@ -17,8 +17,6 @@ public class YJConverter {
 //        initializeCharToIndexTable();
         initializeIndexToCharRdTable();
         initializeCharToIndexRdTable();
-
-
     }
 
     private static HashMap<Character, Integer> charToIndexTable;
