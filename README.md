@@ -1,6 +1,6 @@
 <h1>URL Shortener</h1>
 
-<h2>A Java Service built with Spring Boot, and Redis.</h1>
+<h2>A Java Service built with Spring Boot, and MSSQL.</h1>
 
 <h3>common</h3>
 <b>IDConverter.java</b> <br />
@@ -20,7 +20,7 @@ A Spring Boot Controller responsible for: <br/>
 
 <h2>repository</h3>
 <b>URLRepository</b> <br />
-A Java class responsible for abstracting Redis(database) read/write logic
+A Java class responsible for abstracting MSSQL(database) read/write logic
 
 <h2>service</h3>
 <b>URLConverterService.java</b> <br />
